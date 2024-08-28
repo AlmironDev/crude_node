@@ -31,8 +31,9 @@ export function TaksProvider({ children }) {
         console.log("info de  taks", res)
         return res.data
     }
-    const updateTaks = async (taks) => {
-        const res = await putTaksRequest(taks)
+    const updateTaks = async (id, taks) => {
+        console.log("datros llegado", id, taks)
+        const res = await putTaksRequest(id, taks)
         console.log("update taks", res)
     }
 

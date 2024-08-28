@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import { UseTaks } from "../context/TaksContext";
+import dayjs from "dayjs"
+import utc from "dayjs/plugin/utc"
+dayjs.extend(utc)
 
 export default function TaksCard({ taks }) {
     // const { deleteTask } = useTasks();
@@ -17,7 +20,8 @@ export default function TaksCard({ taks }) {
             </header>
             <p className="text-slate-300">{taks.description}</p>
             {/* format date */}
-            <p>
+            <p>{dayjs(taks.date).utc().format("DD/MM/YYYY")}</p>
+            {/* <p>
                 {taks.date &&
                     new Date(taks.date).toLocaleDateString("en-US", {
                         weekday: "long",
@@ -25,7 +29,7 @@ export default function TaksCard({ taks }) {
                         month: "long",
                         day: "numeric",
                     })}
-            </p>
+            </p> */}
         </div>
     );
 }
