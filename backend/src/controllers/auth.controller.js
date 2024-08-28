@@ -1,6 +1,8 @@
 import User from "../models/user.model.js";
 import bycrpt from "bcryptjs";
 import { createAcessToken } from "../libs/jwt.js";
+import { TOKEN_SCRET } from "../config.js";
+import jwt from "jsonwebtoken";
 export const register = async (req, res) => {
   console.log(req.body);
   const { email, password, username } = req.body;
@@ -37,9 +39,11 @@ export const login = async (req, res) => {
 
   try {
     const userfound = await User.findOne({ email });
-
+    if (!userfound)
+      return res.status(400).json({ message: "correo no registrado " });
     const ismatch = await bycrpt.hash(password, userfound.password);
-
+    if (!ismatch)
+      return res.status(400).json({ message: "password incorrecto" });
     const token = await createAcessToken({ id: userfound._id });
     res.cookie("token", token);
 
@@ -70,5 +74,25 @@ export const profile = async (req, res) => {
     email: Userfound.email,
     createdAt: Userfound.createdAt,
     updatedAt: Userfound.updatedAt,
+  });
+};
+
+export const verifitoken = async (req, res) => {
+  const { token } = req.cookies;
+  if (!token)
+    return res.status(401).json({ message: "No token , no autorizado" });
+
+  jwt.verify(token, TOKEN_SCRET, async (error, user) => {
+    if (error)
+      return res.status(401).json({ message: "No token , no autorizado" });
+    const userfound = await User.findById(user.id);
+    if (!userfound)
+      return res.status(401).json({ message: "Si token , no usuario" });
+
+    return res.status(200).json({
+      id: userfound._id,
+      username: userfound.username,
+      email: userfound.email,
+    });
   });
 };

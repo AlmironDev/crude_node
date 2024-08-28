@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form"
 
 import { useAuth } from "../context/AuthContext"
 import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 function RegisterPage() {
 
@@ -53,11 +53,14 @@ function RegisterPage() {
                         required
                     />
                     {errors.password && <p className="text-red-600">password is required</p>}
-                    <button type="submit" className="hidden md:flex w-full justify-center py-2 px-4 mt-10 border border-transparent text-md font-medium rounded-md text-white bg-slate-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
+                    <button type="submit" className=" md:flex w-full justify-center py-2 px-4 mt-10 border border-transparent text-md font-medium rounded-md text-white bg-slate-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
                         Log in
                     </button>
                 </form >
 
+                <Link to="/login" className="font-medium text-zinc-600 focus:outline-none no-underline transition ease-in-out duration-150 text-sm leading-5 block ml-3 md:ml-0 mt-2">
+                    registrate  ?
+                </Link>
 
             </div >
 
