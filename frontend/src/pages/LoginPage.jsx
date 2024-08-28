@@ -24,97 +24,67 @@ function LoginPage() {
     })
     return (
         <>
-            <div className="relative flex grow w-full md:w-auto mt-8 md:mt-24 md:justify-center md:gap-x-4">
-                <section className="flex-1 ">
-                    <header className="text-black mx-2 md:m-0">
-                        <h1 className="text-2xl md:text-3xl font-bold text-center mb-2">Login</h1>
-
-                    </header>
-
-                    <div className=" bg-zinc-200 max-w-md p-1 px-5 mx-2 rounded-md">
-                        {
-                            LoginErrors?.map((error, i) => (
-                                <div key={i} className="text-red-600 ">{error}</div>
-                            ))
-                        }
-
-                        <form onSubmit={onSubmit} className="gap-y-2 " >
-
-                            <input
-                                type="email"
-                                {...register("email", { required: true })}
-
-                                className="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 sm:text-sm sm:leading-6"
-                                placeholder="john.doe@company.com"
-                                required
-                            />
-                            {errors.email && <p className="text-red-600">email is required</p>}
-                            <input
-                                type="password"
-                                {...register("password", { required: true })}
-
-                                className="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:outline-none  focus:ring-2 focus:ring-blue-200  focus:border-blue-500 sm:text-sm sm:leading-6"
-                                placeholder="•••••••••"
-                                required
-                            />
-                            {errors.password && <p className="text-red-600">password is required</p>}
-                            <button type="submit" className=" md:flex w-full justify-center py-2 px-4 mt-10 border border-transparent text-md font-medium rounded-md text-white bg-slate-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
-                                Log in
-                            </button>
-                        </form >
-
-                        <Link to="/register" className="font-medium text-zinc-600 focus:outline-none no-underline transition ease-in-out duration-150 text-sm leading-5 block ml-3 md:ml-0 mt-2">
-                            registrate  ?
-                        </Link>
-                    </div >
 
 
 
-                    {/* <form action="/login/check" method="POST">
-
-                        <div className="w-full mt-4">
-                            <div className="py-3 px-2.5 md:p-0 bg-white rounded-md w-full">
-                                <label htmlFor="email" className="text-md font-medium leading-6 text-gray-700">
-                                    Email Address
-                                </label>
-                                <input
-                                    type="email"
-                                    className="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 sm:text-sm sm:leading-6"
-                                    placeholder="john.doe@company.com"
-                                    required
-                                />
+            <div className="min-h-full   flex flex-col justify-center sm:py-12">
+                <div className="relative py-3 sm:max-w-xl sm:mx-auto">
+                    <div
+                        className="absolute inset-0 bg-gradient-to-r from-slate-500 to-gray-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
+                    </div>
+                    <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+                        <div className="max-w-md mx-auto">
+                            <div>
+                                <h1 className="text-2xl font-semibold text-black">Login Form with Floating Labels</h1>
                             </div>
+                            <form onSubmit={onSubmit}>
 
-                            <div className="mt-2 py-3 px-2.5 md:p-0 bg-white rounded-md w-full">
-                                <label htmlFor="password" className="text-md font-medium leading-6 text-gray-700">
-                                    Password
-                                </label>
-                                <input
-                                    type="password"
-                                    className="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:outline-none  focus:ring-2 focus:ring-blue-200  focus:border-blue-500 sm:text-sm sm:leading-6"
-                                    placeholder="•••••••••"
-                                    required
-                                />
-                                <p className="text-gray-400 text-sm leading-6 mt-1">
-                                    Password minimum is 6 characters
-                                </p>
-                            </div>
+                                <div className="divide-y divide-gray-200">
+                                    <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
 
-                            <a href="#" className="font-medium text-zinc-600 focus:outline-none no-underline transition ease-in-out duration-150 text-sm leading-5 block ml-3 md:ml-0 mt-2">
-                                Forgot password?
-                            </a>
 
-                            <button type="submit" className="hidden md:flex w-full justify-center py-2 px-4 mt-10 border border-transparent text-md font-medium rounded-md text-white bg-slate-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
-                                Log in
-                            </button>
+
+                                        <div className="relative">
+                                            <input autoComplete="off" id="email" name="email" type="text" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Email address"
+                                                {...register("email", { required: true })}
+                                            />
+                                            <label htmlFor="email" className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+
+                                            >Email Address</label>
+                                        </div>
+                                        {errors.email && <p className="text-red-600">email is required</p>}
+
+                                        <div className="relative">
+                                            <input autoComplete="off" id="password" name="password" type="password" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Password"
+                                                {...register("password", { required: true })}
+
+                                            />
+                                            <label htmlFor="password" className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+
+
+                                            >Password</label>
+                                        </div>
+                                        {errors.password && <p className="text-red-600">password is required</p>}
+
+                                        {
+                                            LoginErrors?.map((error, i) => (
+                                                <div key={i} className="text-red-600 ">{error}</div>
+                                            ))
+                                        }
+                                        <div className="relative">
+                                            <button type="submit" className="bg-blue-500 text-white rounded-md px-2 py-1">Submit</button>
+                                        </div>
+                                        <Link to="/register" className="font-medium text-zinc-600 focus:outline-none no-underline transition ease-in-out duration-150 text-sm leading-5 block ml-3 md:ml-0 mt-2">
+                                            registrate  ?
+                                        </Link>
+
+
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </form> */}
-
-                </section>
-
-                {/* <section className="text-center pt-10 md:pt-0 m-auto md:m-0 hidden md:block">
-                    <img className="rounded-lg" style={{ height: '524px' }} src="https://www.tailwindapp.com/dashboard/v2/images/onboarding/sign-up-finisher-ghostwriter.png" alt="The new Tailwind" />
-                </section> */}
+                    </div>
+                </div>
             </div>
         </>
     )

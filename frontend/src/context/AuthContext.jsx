@@ -21,7 +21,10 @@ export const AuthProvider = ({ children }) => {
     const signup = async (user) => {
         try {
             const res = await registerRequest(user)
+            setisAunthenticated(true)
+            setUser(res.data)
 
+            console.log("respuesta res", res)
         } catch (error) {
             console.log(error.response.data)
             setErrors(error.response.data)
@@ -30,7 +33,7 @@ export const AuthProvider = ({ children }) => {
     const signin = async (user) => {
         try {
             const res = await loginRequest(user)
-            console.log(res.data)
+
             setUser(res.data)
             setisAunthenticated(true)
         } catch (error) {
@@ -40,6 +43,14 @@ export const AuthProvider = ({ children }) => {
             }
             setErrors([error.response.data.message])
         }
+    }
+
+    const logout = () => {
+        Cookies.remove("token")
+        setUser(null)
+        setisAunthenticated(false)
+        setloading(false)
+
     }
     useEffect(() => {
         if (errors.length > 0) {
@@ -58,11 +69,10 @@ export const AuthProvider = ({ children }) => {
                 setisAunthenticated(false)
                 setloading(false)
             }
-            console.log("cookies", cookies)
 
             try {
                 const res = await verifyTokenRequest(cookies.token)
-                console.log("res.data", res.data)
+
                 if (!res.data) return setisAunthenticated(false)
                 setisAunthenticated(true)
                 setUser(res.data)
@@ -80,7 +90,7 @@ export const AuthProvider = ({ children }) => {
 
 
     return (
-        <AuthContext.Provider value={{ signup, signin, user, isAunthenticated, errors, loading }}>
+        <AuthContext.Provider value={{ signup, signin, logout, user, isAunthenticated, errors, loading }}>
             {children}
         </AuthContext.Provider>
     )
