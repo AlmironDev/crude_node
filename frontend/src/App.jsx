@@ -8,6 +8,7 @@ import ProtectedRoute from './ProtectedRoute'
 import TaksFormaPage from './pages/TaksFormaPage'
 import { TaksProvider } from './context/TaksContext'
 import { Navbar } from './components/Navbar'
+import TaskDetailsPage from './pages/TaksDetailPage'
 
 export default function App() {
   return (
@@ -27,7 +28,9 @@ export default function App() {
               <Route element={<ProtectedRoute />}>
                 <Route path='/taks' element={<TaksPage />} />
                 <Route path='/add-taks' element={<TaksFormaPage />} />
-                <Route path='/taks/:id' element={<TaksFormaPage />} />
+                {/* <Route path='/taks/:id' element={<TaksFormaPage />} /> */}
+
+                <Route path="/taks/:taksId" element={<TaskDetailsPage />} />
                 <Route path='/profile' element={<ProfilePage />} />
               </Route>
             </Routes>

@@ -7,16 +7,7 @@ function TaksPage() {
 
     const { taks, getTaks } = UseTaks()
 
-    // const [taks, setTaks] = useState([]);
-    // const getTaks = async () => {
-    //     try {
-    //         const res = await taksRequest()
-    //         console.log("res", res)
-    //         setTaks(res.data)
-    //     } catch (error) {
-    //         console.log("error", error)
-    //     }
-    // }
+
 
     useEffect(() => {
         getTaks()

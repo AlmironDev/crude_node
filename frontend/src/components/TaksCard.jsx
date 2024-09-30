@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { UseTaks } from "../context/TaksContext";
+import { motion } from "framer-motion";  // Importar framer-motion
 import dayjs from "dayjs"
 import utc from "dayjs/plugin/utc"
 dayjs.extend(utc)
@@ -10,12 +11,23 @@ export default function TaksCard({ taks }) {
     const { deleteTaks } = UseTaks()
 
     return (
-        <div>
+        <div className="bg-slate-500 p-3">
             <header className="flex justify-between">
-                <h1 className="text-2xl font-bold">{taks.title}</h1>
+                <motion.h1
+                    className="text-2xl font-bold"
+                    layoutId={`taks-title-${taks._id}`} // Mantener el layoutId
+                    initial={{ opacity: 1, x: 0 }}     // Comienza en su posición original
+                    // Permanece por 2 segundos antes de moverse
+                    transition={{
+                        duration: 2,  // La animación completa dura 2 segundos
+                        times: [0, 0.2],  // El 80% del tiempo, se mantiene en su posición
+                    }}
+                >
+                    {taks.title}
+                </motion.h1>
                 <div className="flex gap-x-2 items-center">
-                    <button onClick={() => deleteTaks(taks._id)}>Delete</button>
-                    <Link to={`/taks/${taks._id}`}>Edit</Link>
+                    <button className="bg-red-600 p-2 rounded-xl" onClick={() => deleteTaks(taks._id)}>Delete</button>
+                    <Link className="bg-sky-500 p-2 rounded-xl" to={`/taks/${taks._id}`}>Edit</Link>
                 </div>
             </header>
             <p className="text-slate-300">{taks.description}</p>
